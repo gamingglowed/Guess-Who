@@ -135,7 +135,7 @@ function createPlayerDropdown() {
 
 
 /* =====================================================
-   PLAYER NAME INPUTS
+   PLAYER NAMES
 ===================================================== */
 
 function createNameInputs() {
@@ -374,7 +374,51 @@ function clearSecretInformation() {
 
 
 /* =====================================================
-   START COMPLETELY NEW MATCH
+   CREATE NEW MATCH SECRET
+===================================================== */
+
+function createMatchSecret() {
+
+    var categoryElement =
+        document.getElementById(
+            "category"
+        );
+
+    var category =
+        categoryElement
+            ? categoryElement.value
+            : "food";
+
+    var categoryWords =
+        words[category];
+
+    /*
+       THIS HAPPENS ONLY ON A NEW MATCH.
+    */
+
+    secretWord =
+        categoryWords[
+            Math.floor(
+                Math.random() *
+                categoryWords.length
+            )
+        ];
+
+    var randomPosition =
+        Math.floor(
+            Math.random() *
+            activePlayers.length
+        );
+
+    imposterIndex =
+        activePlayers[
+            randomPosition
+        ];
+}
+
+
+/* =====================================================
+   START A COMPLETELY NEW MATCH
 ===================================================== */
 
 function startGame() {
@@ -394,110 +438,55 @@ function startGame() {
 
     eliminatedPlayers = [];
 
-    for (var i = 0; i < players.length; i++) {
+    for (
+        var i = 0;
+        i < players.length;
+        i++
+    ) {
         activePlayers.push(i);
     }
-
-    /*
-       NEW MATCH = new imposter + new word.
-    */
-
-    imposterIndex = -1;
-
-    secretWord = "";
-
-    currentPlayer = 0;
 
     roundNumber = 1;
 
     startingPlayerIndex = -1;
-
     previousStartingPlayerIndex = -1;
 
     votes = {};
-
     votersRemaining = [];
 
     currentVoter = -1;
-
     selectedVote = null;
 
     voteResultType = "";
 
     gameStarted = true;
 
+    /*
+       NEW MATCH:
+       new word + new imposter.
+    */
+
     createMatchSecret();
 
-    startRevealPhase();
+    /*
+       Secret reveal happens ONLY HERE.
+    */
+
+    startSecretReveal();
 }
 
 
 /* =====================================================
-   CREATE MATCH SECRET
+   SECRET REVEAL
 ===================================================== */
 
-function createMatchSecret() {
-
-    var categoryElement =
-        document.getElementById(
-            "category"
-        );
-
-    var category =
-        categoryElement
-            ? categoryElement.value
-            : "food";
-
-    var categoryWords =
-        words[category];
-
-    /*
-       ONE WORD FOR THE WHOLE MATCH.
-    */
-
-    secretWord =
-        categoryWords[
-            Math.floor(
-                Math.random() *
-                categoryWords.length
-            )
-        ];
-
-
-    /*
-       ONE IMPOSTER FOR THE WHOLE MATCH.
-    */
-
-    var randomPosition =
-        Math.floor(
-            Math.random() *
-            activePlayers.length
-        );
-
-    imposterIndex =
-        activePlayers[
-            randomPosition
-        ];
-}
-
-
-/* =====================================================
-   START REVEAL PHASE
-===================================================== */
-
-function startRevealPhase() {
-
-    /*
-       Start from original Player 1.
-
-       Eliminated players are skipped,
-       but their original numbers remain
-       unchanged.
-    */
+function startSecretReveal() {
 
     currentPlayer = 0;
 
     findNextActivePlayer();
+
+    clearSecretInformation();
 
     if (
         currentPlayer >=
@@ -508,8 +497,6 @@ function startRevealPhase() {
 
         return;
     }
-
-    clearSecretInformation();
 
     updateRevealScreen();
 
@@ -536,7 +523,7 @@ function findNextActivePlayer() {
 
 
 /* =====================================================
-   UPDATE REVEAL SCREEN
+   REVEAL SCREEN
 ===================================================== */
 
 function updateRevealScreen() {
@@ -560,7 +547,7 @@ function updateRevealScreen() {
 
 
 /* =====================================================
-   REVEAL SECRET
+   SHOW SECRET
 ===================================================== */
 
 function showRole() {
@@ -622,7 +609,7 @@ function showRole() {
 
 
 /* =====================================================
-   PASS TO NEXT PLAYER
+   PASS PLAYER
 ===================================================== */
 
 function nextPlayer() {
@@ -633,19 +620,18 @@ function nextPlayer() {
         );
 
     /*
-       Player MUST reveal before passing.
+       Cannot pass without revealing.
     */
 
     if (
         role &&
         role.classList.contains("hidden")
     ) {
-
         return;
     }
 
     /*
-       Immediately destroy secret information.
+       Destroy previous secret immediately.
     */
 
     clearSecretInformation();
@@ -669,7 +655,7 @@ function nextPlayer() {
 
 
 /* =====================================================
-   ROUND START
+   ROUND START SCREEN
 ===================================================== */
 
 function beginRoundScreen() {
@@ -737,7 +723,6 @@ function chooseStartingPlayer() {
             activePlayers.slice();
     }
 
-
     var normalPlayers = [];
 
     for (
@@ -757,12 +742,9 @@ function chooseStartingPlayer() {
         }
     }
 
-
     /*
-       Normal player has an 80% chance
-       to start.
-
-       Imposter has a 20% chance.
+       80% normal player.
+       20% imposter.
     */
 
     if (
@@ -805,11 +787,11 @@ function startVoting() {
     }
 
     /*
-       Meeting does NOT reset:
-       - imposter
-       - word
-       - eliminated players
-       - round
+       MEETING DOES NOT:
+       - change word
+       - change imposter
+       - restore eliminated players
+       - start a new match
     */
 
     votes = {};
@@ -818,7 +800,6 @@ function startVoting() {
         activePlayers.slice();
 
     currentVoter = -1;
-
     selectedVote = null;
 
     showNextVoter();
@@ -935,11 +916,9 @@ function showVoteChoices() {
 
     list.innerHTML = "";
 
-
     /*
-       ACTIVE PLAYERS ONLY.
-
-       Cannot vote yourself.
+       Only ACTIVE players can be voted for.
+       You cannot vote yourself.
     */
 
     for (
@@ -955,7 +934,6 @@ function showVoteChoices() {
             index ===
             currentVoter
         ) {
-
             continue;
         }
 
@@ -985,14 +963,11 @@ function showVoteChoices() {
 
             })(index);
 
-        list.appendChild(
-            button
-        );
+        list.appendChild(button);
     }
 
-
     /*
-       SKIP BUTTON
+       SKIP
     */
 
     var skip =
@@ -1077,7 +1052,6 @@ function confirmVote() {
         currentVoter === -1 ||
         selectedVote === null
     ) {
-
         return;
     }
 
@@ -1094,7 +1068,6 @@ function confirmVote() {
         );
 
     currentVoter = -1;
-
     selectedVote = null;
 
     showNextVoter();
@@ -1102,7 +1075,7 @@ function confirmVote() {
 
 
 /* =====================================================
-   COUNT VOTES
+   CALCULATE VOTES
 ===================================================== */
 
 function calculateVotes() {
@@ -1132,14 +1105,12 @@ function calculateVotes() {
         counts[vote]++;
     }
 
-
     var keys =
         Object.keys(counts);
 
     if (keys.length === 0) {
         return;
     }
-
 
     var highest = 0;
 
@@ -1158,7 +1129,6 @@ function calculateVotes() {
                 counts[keys[j]];
         }
     }
-
 
     var winners = [];
 
@@ -1179,11 +1149,10 @@ function calculateVotes() {
         }
     }
 
-
     /*
-       =================================================
        TIE
-       =================================================
+       Nobody is eliminated.
+       Same match.
     */
 
     if (winners.length > 1) {
@@ -1198,15 +1167,11 @@ function calculateVotes() {
         return;
     }
 
-
     var winner =
         winners[0];
 
-
     /*
-       =================================================
        SKIP
-       =================================================
     */
 
     if (winner === "skip") {
@@ -1221,15 +1186,12 @@ function calculateVotes() {
         return;
     }
 
-
     var eliminated =
         Number(winner);
 
-
     /*
-       =================================================
-       IMPOSTER FOUND
-       =================================================
+       IMPOSTER VOTED OUT
+       PLAYERS WIN.
     */
 
     if (
@@ -1248,11 +1210,8 @@ function calculateVotes() {
         return;
     }
 
-
     /*
-       =================================================
-       NORMAL PLAYER ELIMINATED
-       =================================================
+       NORMAL PLAYER VOTED OUT.
     */
 
     activePlayers =
@@ -1268,12 +1227,11 @@ function calculateVotes() {
         eliminated
     );
 
-
     /*
-       IMPORTANT GAME RULE:
+       IMPORTANT:
 
-       Imposter wins ONLY when exactly
-       TWO ACTIVE PLAYERS remain.
+       The imposter ONLY wins when
+       exactly TWO active players remain.
     */
 
     if (
@@ -1285,7 +1243,7 @@ function calculateVotes() {
 
         showVotingResult(
             "IMPOSTER WINS",
-            "Only two players remain, including the imposter.",
+            "Only two players remain, and the imposter is one of them.",
             counts,
             "imposterWin"
         );
@@ -1293,10 +1251,9 @@ function calculateVotes() {
         return;
     }
 
-
     /*
-       If more than two remain,
-       continue the match.
+       More than 2 players remain.
+       SAME MATCH CONTINUES.
     */
 
     showVotingResult(
@@ -1340,19 +1297,15 @@ function showVotingResult(
             "resultButton"
         );
 
-
     if (titleElement) {
-
         titleElement.textContent =
             title;
     }
 
     if (textElement) {
-
         textElement.textContent =
             text;
     }
-
 
     if (box) {
 
@@ -1378,12 +1331,19 @@ function showVotingResult(
             row.className =
                 "vote-count";
 
-            var name =
-                key === "skip"
-                    ? "SKIP"
-                    : players[
+            var name;
+
+            if (key === "skip") {
+
+                name = "SKIP";
+
+            } else {
+
+                name =
+                    players[
                         Number(key)
                     ];
+            }
 
             row.innerHTML =
                 "<span>" +
@@ -1397,10 +1357,8 @@ function showVotingResult(
         }
     }
 
-
     voteResultType =
         type;
-
 
     if (button) {
 
@@ -1428,11 +1386,9 @@ function continueAfterVote() {
 
     /*
        TIE:
-       Vote again immediately.
+       Start voting again immediately.
 
-       SAME WORD.
-       SAME IMPOSTER.
-       SAME ACTIVE PLAYERS.
+       SAME MATCH.
     */
 
     if (
@@ -1445,15 +1401,17 @@ function continueAfterVote() {
         return;
     }
 
-
     /*
-       IMPOSTER FOUND
+       IMPOSTER FOUND:
+       MATCH IS OVER.
     */
 
     if (
         voteResultType ===
         "imposter"
     ) {
+
+        gameStarted = false;
 
         showWinScreen(
             "PLAYERS WIN"
@@ -1462,15 +1420,17 @@ function continueAfterVote() {
         return;
     }
 
-
     /*
-       IMPOSTER WINS
+       IMPOSTER WINS:
+       MATCH IS OVER.
     */
 
     if (
         voteResultType ===
         "imposterWin"
     ) {
+
+        gameStarted = false;
 
         showWinScreen(
             "IMPOSTER WINS"
@@ -1479,16 +1439,11 @@ function continueAfterVote() {
         return;
     }
 
-
     /*
        SKIP:
-       Same match continues.
-
-       Same word.
-       Same imposter.
-       No elimination.
-
-       Start another discussion round.
+       SAME MATCH.
+       NO REVEAL.
+       NEXT ROUND.
     */
 
     if (
@@ -1501,16 +1456,11 @@ function continueAfterVote() {
         return;
     }
 
-
     /*
        NORMAL PLAYER ELIMINATED:
-       Same match continues.
-
-       Same word.
-       Same imposter.
-
-       If more than two remain,
-       another round starts.
+       SAME MATCH.
+       NO REVEAL.
+       NEXT ROUND.
     */
 
     if (
@@ -1526,12 +1476,16 @@ function continueAfterVote() {
 
 
 /* =====================================================
-   NEXT ROUND
+   START NEXT ROUND
 ===================================================== */
 
 function startNextRound() {
 
     roundNumber++;
+
+    /*
+       Choose another active starting player.
+    */
 
     chooseStartingPlayer();
 
@@ -1553,24 +1507,27 @@ function startNextRound() {
 
 
 /* =====================================================
-   CONTINUE ROUND
+   CONTINUE NEXT ROUND
 ===================================================== */
 
 function continueRound() {
 
     /*
-       VERY IMPORTANT:
+       THIS IS NOT A NEW MATCH.
 
-       Do NOT create a new word.
+       DO NOT:
+       - choose a new word
+       - choose a new imposter
+       - restore eliminated players
+       - reveal secrets again
 
-       Do NOT create a new imposter.
-
-       This is still the SAME MATCH.
+       Just start a meeting.
     */
 
     votes = {};
 
-    votersRemaining = [];
+    votersRemaining =
+        activePlayers.slice();
 
     currentVoter = -1;
 
@@ -1578,7 +1535,7 @@ function continueRound() {
 
     voteResultType = "";
 
-    startRevealPhase();
+    startVoting();
 }
 
 
@@ -1602,7 +1559,6 @@ function showWinScreen(title) {
         document.getElementById(
             "imposterWord"
         );
-
 
     if (winTitle) {
 
@@ -1635,8 +1591,15 @@ function showWinScreen(title) {
 function newGame() {
 
     /*
-       NEW MATCH is the ONLY place
-       where everything resets.
+       NEW MATCH = COMPLETE RESET.
+
+       Names stay.
+       Topic stays.
+
+       Players return.
+       New imposter.
+       New word.
+       Round 1.
     */
 
     activePlayers = [];
@@ -1651,7 +1614,6 @@ function newGame() {
 
         activePlayers.push(i);
     }
-
 
     imposterIndex = -1;
 
@@ -1677,17 +1639,19 @@ function newGame() {
 
     gameStarted = true;
 
-
     /*
-       New imposter.
-       New word.
-       Same names.
-       Same topic.
+       ONLY NEW MATCH CREATES
+       NEW WORD + NEW IMPOSTER.
     */
 
     createMatchSecret();
 
-    startRevealPhase();
+    /*
+       Secret reveal happens again
+       because this is actually a new match.
+    */
+
+    startSecretReveal();
 }
 
 
@@ -1700,8 +1664,8 @@ function goToLobby() {
     clearSecretInformation();
 
     /*
-       Keep the setup inputs available,
-       but destroy the current match.
+       The setup screen remains populated
+       with the previous names/topic.
     */
 
     players = [];
