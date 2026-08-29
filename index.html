@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guess Who?</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <main class="game">
+
+    <header class="logo">
+      <h1>GUESS <span>WHO?</span></h1>
+      <p>WHO'S HIDING?</p>
+    </header>
+
+    <!-- LOBBY -->
+    <section id="setup" class="screen active">
+      <div class="card">
+        <h2>GAME SETUP</h2>
+
+        <div class="setting">
+          <label>PLAYERS</label>
+
+          <div class="player-number-row">
+            <input id="playerCount" type="number" min="3" max="12" value="4">
+            <select id="playerDropdown"></select>
+          </div>
+        </div>
+
+        <div class="setting">
+          <label>PLAYER NAMES</label>
+          <div id="nameInputs"></div>
+        </div>
+
+        <div class="setting">
+          <label>TOPIC</label>
+          <select id="category">
+            <option value="food">FOOD</option>
+            <option value="animals">ANIMALS</option>
+            <option value="places">PLACES</option>
+          </select>
+        </div>
+
+        <button class="main-button" onclick="startGame()">
+          START MATCH <span>→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- SECRET REVEAL -->
+    <section id="reveal" class="screen">
+      <div class="card reveal-card">
+
+        <p class="small-text">PASS THE DEVICE TO</p>
+
+        <h2 id="playerTitle"></h2>
+
+        <p class="instruction">
+          Make sure nobody else is looking.
+        </p>
+
+        <button id="revealButton" class="main-button" onclick="showRole()">
+          REVEAL
+        </button>
+
+        <div id="role" class="role-box hidden">
+          <h2 id="roleText"></h2>
+
+          <button id="passButton" class="main-button" disabled onclick="nextPlayer()">
+            HIDE & PASS <span>→</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ROUND START -->
+    <section id="roundStart" class="screen">
+      <div class="card round-card">
+
+        <div class="round-number">
+          ROUND <span id="roundNumber">01</span>
+        </div>
+
+        <h2>ROUND<br>BEGINS</h2>
+
+        <div class="starter">
+          <p>NOW START WITH</p>
+          <strong id="startingPlayer"></strong>
+        </div>
+
+        <button class="danger-button" onclick="startVoting()">
+          MEETING
+        </button>
+
+      </div>
+    </section>
+
+    <!-- WHO ARE YOU -->
+    <section id="whoAreYou" class="screen">
+      <div class="card">
+
+        <p class="small-text">WHO ARE YOU?</p>
+        <h2>SELECT YOUR NAME</h2>
+
+        <div id="voterList" class="name-list"></div>
+
+      </div>
+    </section>
+
+    <!-- WHO DO YOU VOTE -->
+    <section id="voteChoice" class="screen">
+      <div class="card">
+
+        <p class="small-text">WHO DO YOU VOTE FOR?</p>
+        <h2 id="voterName"></h2>
+
+        <div id="voteList" class="name-list"></div>
+
+      </div>
+    </section>
+
+    <!-- CONFIRM VOTE -->
+    <section id="voteConfirm" class="screen">
+      <div class="card confirmation-card">
+
+        <div class="warning-icon">?</div>
+
+        <h2>CONFIRM VOTE</h2>
+
+        <p id="voteConfirmationText"></p>
+
+        <button class="danger-button" onclick="confirmVote()">
+          CONFIRM
+        </button>
+
+        <button class="secondary-button" onclick="cancelVote()">
+          GO BACK
+        </button>
+
+      </div>
+    </section>
+
+    <!-- VOTE RESULT -->
+    <section id="voteResult" class="screen">
+      <div class="card result-card">
+
+        <p class="small-text">MEETING RESULT</p>
+
+        <h2 id="voteResultTitle"></h2>
+        <p id="voteResultText"></p>
+
+        <div id="voteCounts" class="vote-counts"></div>
+
+        <button id="resultButton" class="main-button" onclick="continueAfterVote()">
+          CONTINUE <span>→</span>
+        </button>
+
+      </div>
+    </section>
+
+    <!-- NEXT ROUND -->
+    <section id="nextStart" class="screen">
+      <div class="card round-card">
+
+        <p class="small-text">NEXT ROUND</p>
+
+        <h2>NOW START WITH</h2>
+
+        <div class="starter">
+          <strong id="nextStartingPlayer"></strong>
+        </div>
+
+        <button class="danger-button" onclick="continueRound()">
+          MEETING
+        </button>
+
+      </div>
+    </section>
+
+    <!-- WIN SCREEN -->
+    <section id="winScreen" class="screen">
+      <div class="card final-card">
+
+        <p class="small-text">GAME OVER</p>
+
+        <h2 id="winTitle"></h2>
+
+        <div class="imposter-label">IMPOSTER</div>
+
+        <h1 id="imposterName"></h1>
+
+        <div class="secret-result">
+          <p>THE SECRET WORD WAS</p>
+          <strong id="imposterWord"></strong>
+        </div>
+
+        <button class="main-button" onclick="newGame()">
+          NEW MATCH <span>↻</span>
+        </button>
+
+        <button class="secondary-button" onclick="goToLobby()">
+          GO TO LOBBY
+        </button>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
