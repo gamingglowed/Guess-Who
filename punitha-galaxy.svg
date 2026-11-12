@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 2560" preserveAspectRatio="xMidYMid slice">
+<defs>
+ <radialGradient id="space"><stop stop-color="#1b101b"/><stop offset=".48" stop-color="#0d0911"/><stop offset="1" stop-color="#030305"/></radialGradient>
+ <radialGradient id="ember"><stop stop-color="#ff9a55" stop-opacity=".55"/><stop offset=".24" stop-color="#e45634" stop-opacity=".4"/><stop offset=".62" stop-color="#8d2639" stop-opacity=".18"/><stop offset="1" stop-color="#42152f" stop-opacity="0"/></radialGradient>
+ <radialGradient id="violet"><stop stop-color="#c28bff" stop-opacity=".48"/><stop offset=".32" stop-color="#7545b7" stop-opacity=".29"/><stop offset=".7" stop-color="#46265f" stop-opacity=".1"/><stop offset="1" stop-color="#201128" stop-opacity="0"/></radialGradient>
+ <radialGradient id="gold"><stop stop-color="#ffd194" stop-opacity=".32"/><stop offset=".38" stop-color="#e87843" stop-opacity=".18"/><stop offset="1" stop-color="#70243c" stop-opacity="0"/></radialGradient>
+ <linearGradient id="shadow" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#030204" stop-opacity=".4"/><stop offset=".48" stop-color="#0a0710" stop-opacity="0"/><stop offset="1" stop-color="#020203" stop-opacity=".5"/></linearGradient>
+ <pattern id="stars" width="260" height="290" patternUnits="userSpaceOnUse"><circle cx="25" cy="48" r="1.1" fill="#fff" opacity=".74"/><circle cx="117" cy="37" r=".7" fill="#ffd9c3" opacity=".66"/><circle cx="204" cy="104" r=".9" fill="#fff" opacity=".7"/><circle cx="239" cy="220" r=".65" fill="#e1caff" opacity=".78"/><circle cx="71" cy="184" r=".75" fill="#fff" opacity=".57"/><circle cx="151" cy="252" r="1" fill="#ffe2c9" opacity=".65"/><circle cx="41" cy="264" r=".55" fill="#fff" opacity=".68"/><path d="M204 96v16m-8-8h16" stroke="#fff" stroke-width=".6" opacity=".66"/></pattern>
+</defs>
+<rect width="1440" height="2560" fill="url(#space)"/>
+<ellipse cx="340" cy="640" rx="740" ry="610" fill="url(#ember)" transform="rotate(-24 340 640)"/>
+<ellipse cx="1100" cy="1120" rx="700" ry="780" fill="url(#violet)" transform="rotate(30 1100 1120)"/>
+<ellipse cx="360" cy="1800" rx="760" ry="660" fill="url(#gold)" transform="rotate(-28 360 1800)"/>
+<ellipse cx="1130" cy="2200" rx="700" ry="560" fill="url(#ember)" transform="rotate(-14 1130 2200)"/>
+<g fill="none" stroke-linecap="round"><path d="M-90 870c220-230 425-265 635-112s320 205 515 35 340-249 490-198" stroke="#ffb879" stroke-opacity=".17" stroke-width="126"/><path d="M-50 904c224-212 413-234 619-91s327 193 530 18 363-238 523-170" stroke="#ff8d63" stroke-opacity=".15" stroke-width="37"/><path d="M-90 1580c244-226 456-226 650-77s295 199 507 18 335-203 478-130" stroke="#c39cff" stroke-opacity=".16" stroke-width="100"/><path d="M-30 1613c235-193 438-198 623-60s321 188 519 12 353-202 502-113" stroke="#ffbd8b" stroke-opacity=".13" stroke-width="28"/><path d="M40 2304c233-144 430-130 610 7s319 182 499 47 296-164 416-95" stroke="#ee805b" stroke-opacity=".15" stroke-width="76"/></g>
+<rect width="1440" height="2560" fill="url(#stars)" opacity=".84"/><rect width="1440" height="2560" fill="url(#shadow)"/>
+</svg>

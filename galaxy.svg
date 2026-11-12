@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 2560" preserveAspectRatio="xMidYMid slice">
+<defs>
+ <radialGradient id="base"><stop stop-color="#17142c"/><stop offset=".48" stop-color="#0b0c1c"/><stop offset="1" stop-color="#05060e"/></radialGradient>
+ <radialGradient id="violet"><stop stop-color="#c18bff" stop-opacity=".62"/><stop offset=".23" stop-color="#8154d7" stop-opacity=".44"/><stop offset=".57" stop-color="#492b91" stop-opacity=".2"/><stop offset="1" stop-color="#24134b" stop-opacity="0"/></radialGradient>
+ <radialGradient id="blue"><stop stop-color="#71baff" stop-opacity=".48"/><stop offset=".3" stop-color="#477ce0" stop-opacity=".3"/><stop offset=".68" stop-color="#253d93" stop-opacity=".14"/><stop offset="1" stop-color="#111936" stop-opacity="0"/></radialGradient>
+ <radialGradient id="rose"><stop stop-color="#eb9bff" stop-opacity=".25"/><stop offset=".45" stop-color="#a153cf" stop-opacity=".13"/><stop offset="1" stop-color="#632c9a" stop-opacity="0"/></radialGradient>
+ <linearGradient id="veil" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#090817" stop-opacity=".4"/><stop offset=".48" stop-color="#100e23" stop-opacity="0"/><stop offset="1" stop-color="#050812" stop-opacity=".58"/></linearGradient>
+ <pattern id="dust" width="280" height="320" patternUnits="userSpaceOnUse"><circle cx="24" cy="32" r="1.2" fill="#fff" opacity=".68"/><circle cx="96" cy="86" r=".8" fill="#dfd1ff" opacity=".58"/><circle cx="201" cy="44" r=".7" fill="#a9d4ff" opacity=".7"/><circle cx="241" cy="172" r="1" fill="#fff" opacity=".55"/><circle cx="56" cy="231" r=".65" fill="#f1dcff" opacity=".7"/><circle cx="159" cy="284" r=".95" fill="#b9cfff" opacity=".53"/><circle cx="127" cy="191" r=".55" fill="#fff" opacity=".65"/><circle cx="271" cy="293" r=".6" fill="#fff" opacity=".5"/><path d="M24 27v10M19 32h10" stroke="#fff" stroke-width=".55" opacity=".5"/></pattern>
+ <pattern id="grain" width="90" height="90" patternUnits="userSpaceOnUse"><circle cx="7" cy="10" r=".6" fill="#fff" opacity=".18"/><circle cx="41" cy="26" r=".45" fill="#d9caff" opacity=".15"/><circle cx="76" cy="68" r=".55" fill="#fff" opacity=".13"/><circle cx="26" cy="77" r=".4" fill="#fff" opacity=".15"/></pattern>
+</defs>
+<rect width="1440" height="2560" fill="url(#base)"/>
+<!-- Broad, layered nebula clouds -->
+<ellipse cx="1040" cy="560" rx="650" ry="760" fill="url(#blue)" transform="rotate(28 1040 560)"/>
+<ellipse cx="420" cy="1030" rx="730" ry="620" fill="url(#violet)" transform="rotate(-22 420 1030)"/>
+<ellipse cx="1030" cy="1330" rx="650" ry="760" fill="url(#rose)" transform="rotate(-33 1030 1330)"/>
+<ellipse cx="280" cy="1820" rx="750" ry="580" fill="url(#blue)" transform="rotate(18 280 1820)"/>
+<ellipse cx="1040" cy="2110" rx="760" ry="660" fill="url(#violet)" transform="rotate(-18 1040 2110)"/>
+<!-- Fine filaments suggest luminous gas clouds without costly blur filters -->
+<g fill="none" stroke-linecap="round">
+ <path d="M-80 972C170 712 370 750 563 876s312 202 542 21 331-236 487-191" stroke="#b98bff" stroke-opacity=".16" stroke-width="132"/>
+ <path d="M-70 1001c244-253 431-214 622-77s307 187 528 8 356-239 529-185" stroke="#d7b7ff" stroke-opacity=".13" stroke-width="42"/>
+ <path d="M-95 1039c220-214 396-203 589-67s333 202 558 17 384-236 590-170" stroke="#8eaaff" stroke-opacity=".17" stroke-width="19"/>
+ <path d="M-80 1635c237-211 450-217 647-76s302 198 512 16 336-198 479-126" stroke="#8baeff" stroke-opacity=".15" stroke-width="106"/>
+ <path d="M-40 1661c245-190 448-183 636-49s318 182 525 5 339-199 504-108" stroke="#cab0ff" stroke-opacity=".16" stroke-width="31"/>
+ <path d="M85 451c192 100 335 95 502-11s319-162 493-76 224 126 399 75" stroke="#9866d4" stroke-opacity=".14" stroke-width="64"/>
+ <path d="M40 2282c220-142 420-125 601 17s313 172 492 44 300-176 405-106" stroke="#bd8cff" stroke-opacity=".14" stroke-width="75"/>
+</g>
+<rect width="1440" height="2560" fill="url(#dust)" opacity=".8"/>
+<rect width="1440" height="2560" fill="url(#grain)" opacity=".58"/>
+<rect width="1440" height="2560" fill="url(#veil)"/>
+</svg>

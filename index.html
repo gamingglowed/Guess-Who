@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080812">
+  <meta name="description" content="A little corner of the universe, made to say thank you.">
+  <title>Thanks for being in my life.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="universe" aria-hidden="true">
+    <div class="nebula nebula-one"></div><div class="nebula nebula-two"></div>
+    <div class="star-layer stars-far"></div><div class="star-layer stars-near"></div>
+    <div class="horizon-glow"></div>
+  </div>
+  <main class="experience" id="experience">
+    <section class="screen entrance" id="entrance" aria-labelledby="main-title">
+      <div class="eyebrow"><span class="eyebrow-line"></span>A LITTLE NOTE FROM ME<span class="eyebrow-line"></span></div>
+      <h1 id="main-title">Thanks for being<br><em>in my life.</em></h1>
+      <p class="intro">Before you enter, may I know who you are?</p>
+      <form id="name-form" autocomplete="off">
+        <label class="sr-only" for="name-input">Your name</label>
+        <div class="input-wrap"><span class="input-star" aria-hidden="true">✦</span><input id="name-input" name="name" type="text" placeholder="Type your name…" autocapitalize="words" required><button class="clear-button" type="button" aria-label="Clear name" hidden>×</button></div>
+        <p class="suggestion" id="suggestion" aria-live="polite"></p>
+        <button class="enter-button" type="submit"><span>Find my note</span><span class="button-arrow" aria-hidden="true">↗</span></button>
+      </form>
+      <p class="hint">Made with a little stardust <span aria-hidden="true">✧</span></p>
+    </section>
+    <section class="screen thank-you" id="thank-you" aria-live="polite" aria-hidden="true" hidden>
+      <div class="eyebrow reveal-item"><span class="eyebrow-line"></span>YOU’RE ONE OF MY FAVOURITE PEOPLE<span class="eyebrow-line"></span></div>
+      <h2 class="reveal-item" id="thanks-heading"></h2>
+      <p class="thank-you-subtitle reveal-item" id="thanks-subtitle" hidden></p>
+      <figure class="portrait portrait-top reveal-item" id="portrait-top" hidden><img id="person-image-top" alt="" loading="lazy"><div class="image-fallback" aria-hidden="true"><span>✦</span><small>TOP PHOTO · OPTIONAL</small></div></figure>
+      <figure class="portrait reveal-item" id="portrait" hidden><img id="person-image" alt="" loading="lazy"><div class="image-fallback" aria-hidden="true"><span>✦</span><small>PHOTO GOES HERE · OPTIONAL</small></div></figure>
+      <div class="message-wrap reveal-item"><span class="message-star" aria-hidden="true">✧</span><p id="thank-you-message"></p></div>
+      <div class="personal-note reveal-item"><span>A LITTLE EXTRA</span><p id="personal-note-text"></p></div>
+      <button class="back-button reveal-item" id="back-button" type="button"><span aria-hidden="true">←</span> Back to the stars</button>
+      <p class="signature reveal-item">with love, always <span aria-hidden="true">✦</span></p>
+    </section>
+  </main>
+  <footer>AN APPRECIATION NOTE <span>✧</span> JUST FOR YOU</footer>
+  <script src="people.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
